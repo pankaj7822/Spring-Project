@@ -1,0 +1,141 @@
+<!doctype html>
+<html lang="en">
+<head>
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/css/bootstrap.min.css">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/js/bootstrap.min.js"></script>
+<style>
+#books {
+  font-family: "Trebuchet MS", Arial, Helvetica, sans-serif;
+  border-collapse: collapse;
+  width: 100%;
+}
+.row{
+  margin-top:50px;
+  padding:30px;
+}
+#books td, #books th {
+  border: 1px solid #ddd;
+  padding: 8px;
+}
+
+#books tr:nth-child(even){background-color: #f2f2f2;}
+
+#books tr:hover {background-color: #ddd;}
+
+#books th {
+  padding-top: 12px;
+  padding-bottom: 12px;
+  text-align: left;
+  background-color: #4CAF50;
+  color: white;
+}
+input[type=text], select {
+  width: 100%;
+  padding: 12px 20px;
+  margin: 8px 0;
+  display: inline-block;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  box-sizing: border-box;
+}
+
+input[type=submit] {
+  width: 100%;
+  background-color: #4CAF50;
+  color: white;
+  padding: 14px 20px;
+  margin: 8px 0;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+}
+
+input[type=submit]:hover {
+  background-color: #45a049;
+}
+
+#AddForm,#updateForm{
+  border-radius: 5px;
+  background-color: #f2f2f2;
+  padding: 20px;
+}
+</style>
+</head>
+<body>
+<th:block th:include="header"></th:block>
+
+<div class="container">
+<div class="row">
+<div style="text-align:center" class="col-md-12">
+<h2 style="text-align:center">Current Stock Of Books</h2>
+ <table id="books">
+        <thead>
+          <tr>
+            <th>ID</th>
+            <th>Name</th>
+            <th>Author</th>
+            <th>Level</th>
+            <th>Selling Price</th>
+            <th>Marked Price</th>
+            <th>Discounted Price</th>
+            <th>Stock</th>
+            <th>Edition</th>
+            <th>Genre</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr th:each="book : ${Booklist}">
+            <td th:text="${book.id}">Text ...</td>
+            <td th:text="${book.name}">Text ...</td>
+            <td th:text="${book.author}">Text ...</td>
+            <td th:text="${book.level}">Text...</td>
+            <td th:text="${book.selling_price}">Text...</td>
+            <td th:text="${book.marked_price}">Text...</td>
+            <td th:text="${book.discounted_price}">Text...</td>
+            <td th:text="${book.stock}">Text...</td>
+            <td th:text="${book.edition}">Text...</td>
+            <td th:text="${book.genre}">Text...</td>
+          </tr>
+        </tbody>
+      </table>
+      </div>
+</div>
+      <div class="row">
+    <div id="AddForm" class="col-md-6">
+  <h2>Add A Book</h2>
+  <form action="#" th:action="@{/book}" method="post">
+  <label>Name<input type="text" name="name" id="name"></input></label>
+  <label>Author<input type="text" name="author" id="author"></input></label>
+  <label>level<input type="text" name="level" id="level"></input></label>
+  <label>Selling Price<input type="text" name="selling_price" id="selling_price"></input></label>
+  <label>Marked Price<input type="text" name="marked_price" id="marked_price"></input></label>
+  <label>Discounted Price<input type="text" name="discounted_price" id="discounted_price"></input></label>
+  <label>Stock<input type="text" name="stock" id="stock"></input></label>
+  <label>edition<input type="text" name="edition" id="edition"></input></label>
+  <label>Genre<input type="text" name="genre" id="genre"></input></label>
+  <input type="submit" value="Submit"></input>
+  </form>
+  </div>
+  <div class="col-md-3" id="deleteForm">
+  <h2>Delete A Book</h2>
+  <form action="/delete" th:action="@{/delete}" method="post">
+  <label>Name<input type="text" name="name" id="name"></input></label>
+  <label>ID<input type="text" name="id" id="id"></input></label>
+  <input type="submit" value="Submit"></input>
+  </form>
+  </div>
+    <div class="col-md-3" id="updateForm">
+  <h2>Update Stock of Book</h2>
+  <form action="/delete" th:action="@{/update}" method="post">
+  <label>Name<input type="text" name="name" id="name"></input></label>
+  <label>ID<input type="text" name="id" id="id"></input></label>
+  <label>Stock<input type="text" name="stock" id="stock"></input></label>
+  <input type="submit" value="Submit"></input>
+  </form>
+  </div>
+  </div>
+</div>
+<th:block th:include="footer"></th:block>
+</body>
+</html>

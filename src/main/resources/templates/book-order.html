@@ -1,0 +1,147 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/js/bootstrap.min.js"></script>
+    <style>
+        #books {
+            font-family: "Trebuchet MS", Arial, Helvetica, sans-serif;
+            border-collapse: collapse;
+            width: 100%;
+        }
+
+        .row {
+            margin-top: 50px;
+            padding: 30px;
+        }
+
+        #books td,
+        #books th {
+            border: 1px solid #ddd;
+            padding: 8px;
+        }
+
+        #books tr:nth-child(even) {
+            background-color: #f2f2f2;
+        }
+
+        #books tr:hover {
+            background-color: #ddd;
+        }
+
+        #books th {
+            padding-top: 12px;
+            padding-bottom: 12px;
+            text-align: left;
+            background-color: #4CAF50;
+            color: white;
+        }
+
+        input[type=text],
+        select {
+            width: 100%;
+            padding: 12px 20px;
+            margin: 8px 0;
+            display: inline-block;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+            box-sizing: border-box;
+        }
+
+        input[type=submit] {
+            width: 100%;
+            background-color: #4CAF50;
+            color: white;
+            padding: 14px 20px;
+            margin: 8px 0;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+        }
+
+        input[type=submit]:hover {
+            background-color: #45a049;
+        }
+
+        #AddForm,
+        #updateForm {
+            border-radius: 5px;
+            background-color: #f2f2f2;
+            padding: 20px;
+        }
+    </style>
+</head>
+
+<body>
+<th:block th:include="header"></th:block>
+    <div class="container">
+        <div class="row">
+            <div style="text-align:center" class="col-md-12">
+                <h2 style="text-align:center">Current Stock Of books</h2>
+                <form action="" method="post">
+                <input type="hidden" th:value="${profile.getId()}" name="profileid" />
+                <table id="books">
+                    <thead>
+                        <tr>
+                            <th>ID</th>
+                            <th>Name</th>
+                            <th>Author</th>
+                            <th>Level</th>
+                            <th>Selling Price</th>
+                            <th>Marked Price</th>
+                            <th>Discounted Price</th>
+                            <th>Stock</th>
+                            <th>Edition</th>booksbooksbooks
+                            <th>Genre</th>
+                            <th>Choose this book</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr th:each="book, iter: ${books}">
+                            <td th:text="${book.getId()}" />
+                            <td th:text="${book.getName()}" />
+                            <td th:text="${book.getAuthor()}" />
+                            <td th:text="${book.getLevel()}" />
+                            <td th:text="${book.getSelling_price()}" />
+                            <td th:text="${book.getMarked_price()}" />
+                            <td th:text="${book.getDiscounted_price()}" />
+                            <td th:text="${book.getStock()}" />
+                            <td th:text="${book.getEdition()}" />
+                            <td th:text="${book.getGenre()}" />
+                            <td>
+                            <input name="books" type="checkbox" th:value="${book.getId()}" />                            
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+
+                <h3>Deliver to address</h3>
+                <select name="address">
+                    <option 
+                        th:each="address: ${addresses}" 
+                        th:value="${address.getId()}"
+                        th:text="${address.getCity()}+', '+${address.getLandmark()}"
+                    />
+                </select>
+                <select name="phone">
+                    <option 
+                        th:each="phone: ${phones}" 
+                        th:value="${phone.getId()}"
+                        th:text="${phone.getPhone_number()}"
+                    />
+                </select>
+                <select name="mode">
+                    <option value="Cash">Cash</option>
+                    <option value="Netbanking">Netbanking</option>
+                </select>
+                <input type="submit" value="Submit"></input>
+                </form>
+            </div>
+        </div>
+    </div>
+        <th:block th:include="footer"></th:block>
+</body>
+
+</html>

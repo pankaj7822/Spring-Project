@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html>
+<head>
+<style>
+body {margin:0;}
+
+ul {
+    z-index:999;
+  list-style-type: none;
+  margin: 0;
+  padding: 0;
+  overflow: hidden;
+  background-color: #333;
+  position: fixed;
+  top: 0;
+  width: 100%;
+}
+
+li {
+  float: left;
+}
+
+li a {
+  display: block;
+  color: white;
+  text-align: center;
+  padding: 14px 16px;
+  text-decoration: none;
+}
+
+li a:hover:not(.active) {
+  background-color: #111;
+}
+
+</style>
+</head>
+<body>
+
+<ul>
+  <li><a href="/">Home</a></li>
+  <li><a sec:authorize="isAnonymous()" href="/login">Login</a></li>
+  <li><a sec:authorize="isAnonymous()" href="/register">Register</a></li>
+  <li><a sec:authorize="isAuthenticated()" href="/logout">Logout</a></li>
+  <li><a sec:authorize="isAuthenticated()" href="/DashBoard">Dashboard</a></li>
+  <li><a  sec:authorize="isAuthenticated()"  href="/order-book">Order Book</a></li>
+  <li><a  sec:authorize="isAuthenticated()"  href="/ordered-books">Ordered Books</a></li>
+  <li><a  sec:authorize="hasAuthority('ADMIN')"  href="/all-profile">All profiles</a></li>
+  <li><a  sec:authorize="hasAuthority('ADMIN')"  href="/book">Manage Books</a></li>
+  <li><a  sec:authorize="hasAuthority('ADMIN')"  href="/stationary">Manage Stationary</a></li>
+</ul>
+</body>
+</html>

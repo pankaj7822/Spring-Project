@@ -1,0 +1,131 @@
+<!doctype html>
+<html lang="en">
+<head>
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/css/bootstrap.min.css">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/js/bootstrap.min.js"></script>
+<style>
+#stationary {
+  font-family: "Trebuchet MS", Arial, Helvetica, sans-serif;
+  border-collapse: collapse;
+  width: 100%;
+}
+.row{
+  margin-top:50px;
+  padding:30px;
+}
+#stationary td, #stationary th {
+  border: 1px solid #ddd;
+  padding: 8px;
+}
+
+#stationary tr:nth-child(even){background-color: #f2f2f2;}
+
+#stationary tr:hover {background-color: #ddd;}
+
+#stationary th {
+  padding-top: 12px;
+  padding-bottom: 12px;
+  text-align: left;
+  background-color: #4CAF50;
+  color: white;
+}
+input[type=text], select {
+  width: 100%;
+  padding: 12px 20px;
+  margin: 8px 0;
+  display: inline-block;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  box-sizing: border-box;
+}
+
+input[type=submit] {
+  width: 100%;
+  background-color: #4CAF50;
+  color: white;
+  padding: 14px 20px;
+  margin: 8px 0;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+}
+
+input[type=submit]:hover {
+  background-color: #45a049;
+}
+
+#AddForm,#updateForm{
+  border-radius: 5px;
+  background-color: #f2f2f2;
+  padding: 20px;
+}
+</style>
+</head>
+<body>
+<th:block th:include="header"></th:block>
+<div class="container">
+<div class="row">
+        <div style="text-align:center" class="col-md-12">
+        <h2 style="text-align:center">Current Stock Of Stationary</h2>
+        <table id="stationary">
+                <thead>
+                  <tr>
+                    <th>ID</th>
+                    <th>Item Type</th>
+                    <th>Brand</th>
+                    <th>Selling Price</th>
+                    <th>Marked Price</th>
+                    <th>Discounted Price</th>
+                    <th>Stock</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr th:each="stationary : ${Stationarylist}">
+                    <td th:text="${stationary.id}">Text ...</td>
+                    <td th:text="${stationary.item_type}">Text ...</td>
+                    <td th:text="${stationary.brand}">Text ...</td>
+                    <td th:text="${stationary.selling_price}">Text...</td>
+                    <td th:text="${stationary.marked_price}">Text...</td>
+                    <td th:text="${stationary.discounted_price}">Text...</td>
+                    <td th:text="${stationary.stock}">Text...</td>
+                  </tr>
+                </tbody>
+              </table>
+              </div>
+      </div>
+      <div class="row">
+    <div id="AddForm" class="col-md-6">
+  <h2>Add A Stationary</h2>
+  <form action="#" th:action="@{/stationary}" method="post">
+  <label>Item_type<input type="text" name="item_type" id="item_type"></input></label>
+  <label>Brand<input type="text" name="brand" id="brand"></input></label>
+  <label>Selling Price<input type="text" name="selling_price" id="selling_price"></input></label>
+  <label>Marked Price<input type="text" name="marked_price" id="marked_price"></input></label>
+  <label>Discounted Price<input type="text" name="discounted_price" id="discounted_price"></input></label>
+  <label>Stock<input type="text" name="stock" id="stock"></input></label>
+  <input type="submit" value="Submit"></input>
+  </form>
+  </div>
+  <div id="deleteForm" class="col-md-3">
+  <h2>Delete A stationary</h2>
+  <form action="/delete" th:action="@{/delete-stationary}" method="post">
+  <label>Item Type<input type="text" name="item_type" id="item_type"></input></label>
+  <label>ID<input type="text" name="id" id="id"></input></label>
+  <input type="submit" value="Submit"></input>
+  </form>
+  </div>
+    <div id="updateForm" class="col-md-3">
+  <h2>Update Stock of stationary</h2>
+  <form action="/delete" th:action="@{/update-stationary}" method="post">
+  <label>Item Type<input type="text" name="item_type" id="item_type"></input></label>
+  <label>ID<input type="text" name="id" id="id"></input></label>
+  <label>Stock<input type="text" name="stock" id="stock"></input></label>
+  <input type="submit" value="Submit"></input>
+  </form>
+  </div>
+</div>
+  </div>
+<th:block th:include="footer"></th:block>
+</body>
+</html>
